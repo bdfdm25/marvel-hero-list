@@ -34,8 +34,6 @@ export class HeroListComponent implements OnInit, OnDestroy {
   getHeroList() {
     this.subscription = this.heroService.getHeroes().subscribe(res => {
       this.heroList = res.data.results.splice(10);
-    }, error => {
-      console.log(error);
     });
   }
 

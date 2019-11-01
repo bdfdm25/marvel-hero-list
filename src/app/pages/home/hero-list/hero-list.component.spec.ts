@@ -8,8 +8,9 @@ import {
   HttpClientTestingModule,
   HttpTestingController
 } from '@angular/common/http/testing';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Hero } from 'src/app/shared/models/hero.class';
 
 describe('HeroListComponent', () => {
   let component: HeroListComponent;
@@ -38,14 +39,6 @@ describe('HeroListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('getHeroes() should http GET heroes list', () => {
-    fixture.detectChanges();
-    service.getHeroes().subscribe(res => {
-      expect(service.getHeroes).toHaveBeenCalled();
-      expect(res).toBeGreaterThan(1);
-    });
-  });
-
   it('should navigate to hero detail', () => {
     fixture.detectChanges();
     const router = TestBed.get(Router);
@@ -54,5 +47,22 @@ describe('HeroListComponent', () => {
 
     component.showHeroDetails(10);
     expect(navigateSpy).toHaveBeenCalled();
+  });
+
+  it('should get the hero list', async () => {
+    const heroService = fixture.debugElement.injector.get(HeroService);
+    const heroList: Hero[] = [];
+
+    component.getHeroList();
+    fixture.detectChanges();
+
+    spyOn(heroService, 'getHeroes').and.returnValue(of(heroList));
+
+    heroService.getHeroes().subscribe(res => {
+      fixture.detectChanges();
+      expect(heroService.getHeroes).toHaveBeenCalledTimes(1);
+      expect(res).toEqual(heroList);
+      expect(heroList).toBeLessThanOrEqual(10);
+    });
   });
 });

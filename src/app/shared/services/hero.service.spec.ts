@@ -6,7 +6,7 @@ import {
   HttpTestingController
 } from '@angular/common/http/testing';
 
-describe('GithubApiService', () => {
+describe('HeroService', () => {
   let injector: TestBed;
   let service: HeroService;
   let httpMock: HttpTestingController;
@@ -38,6 +38,20 @@ describe('GithubApiService', () => {
       const req = httpMock.expectOne(Routes.HEROES);
       expect(req.request.method).toBe('GET');
       req.flush(dummyHeroes);
+    });
+  });
+
+  describe('#getHeroeById', () => {
+    it('should return an Observable<any> by ID', () => {
+      const dummyHeroes = [{ id: 1, name: 'John' }, { id: 2, name: 'Doe' }];
+
+      service.getHeroById(1).subscribe(hero => {
+        expect(hero).toEqual(dummyHeroes[0]);
+      });
+
+      const req = httpMock.expectOne(Routes.HERO_BY_ID(1));
+      expect(req.request.method).toBe('GET');
+      req.flush(dummyHeroes[0]);
     });
   });
 });

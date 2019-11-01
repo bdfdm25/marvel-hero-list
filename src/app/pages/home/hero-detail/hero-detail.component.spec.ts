@@ -1,8 +1,9 @@
+import { Hero } from 'src/app/shared/models/hero.class';
 import { HeroService } from 'src/app/shared/services/hero.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HeroDetailComponent } from './hero-detail.component';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 describe('HeroDetailComponent', () => {
@@ -38,12 +39,19 @@ describe('HeroDetailComponent', () => {
   it('should get the hero detail by id', async () => {
     const heroService = fixture.debugElement.injector.get(HeroService);
     const heroId = 9999;
+    const hero: Hero = new Hero();
 
-    await heroService.getHeroById(heroId).subscribe(res => {
+    component.getHeroDetail();
+    fixture.detectChanges();
+
+    spyOn(heroService, 'getHeroById').and.returnValue(of(hero));
+
+    heroService.getHeroById(heroId).subscribe(res => {
       fixture.detectChanges();
-      expect(heroService.getHeroById).toHaveBeenCalled();
-      expect(res).toEqual(1);
+      expect(heroService.getHeroById).toHaveBeenCalledWith(heroId);
+      expect(res).toEqual(hero);
     });
   });
+
 
 });

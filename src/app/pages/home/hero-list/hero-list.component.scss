@@ -1,12 +1,45 @@
+@import "../../../../assets/scss/styles.scss";
+
 .container {
-  margin-top: 8rem;
   padding: 4rem;
-  border: 1px solid red;
 
   .card {
+    width: 100%;
+
+    .card-header {
+      color: white;
+      background-color: $marvel-red;
+      padding: .75rem;
+
+      .card-title {
+        font-family: $marvel-font;
+        font-size: 3rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+      }
+    }
+
     .card-body {
-      max-height: 20rem;
+      max-height: 30rem;
       overflow-y: auto;
+      padding: 0;
+      .table {
+        padding: .75rem 1.25rem;
+        thead th {
+          font-family: $marvel-font;
+          text-transform: uppercase;
+          letter-spacing: 0.1rem;
+          position: sticky;
+          top: 0;
+          border: none;
+          color: white;
+          background-color: $marvel-red;
+        }
+
+        tbody th, td {
+          cursor: pointer;
+        }
+      }
     }
   }
 }
@@ -16,5 +49,12 @@
   .container {
     margin: 0;
     padding: 2rem;
+
+    .card {
+      .card-body {
+        max-height: 100%;
+        overflow-y: auto;
+      }
+    }
   }
 }

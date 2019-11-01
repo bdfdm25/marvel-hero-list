@@ -1,1 +1,25 @@
-<p>hero-detail works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="media">
+            <img [src]="imgUrl" class="align-self-center mr-3" alt="...">
+            <div class="media-body">
+              <h5 class="mt-0">{{hero.name}} - Details</h5>
+              <p><span class="field">Id: </span>{{hero.id}}</p>
+              <p><span class="field">Name: </span>{{hero.name}}</p>
+              <p class="mb-0"><span class="field">Description: </span>
+                <span *ngIf="hero.description">{{hero.description}}</span>
+                <span *ngIf="!hero.description">Missing description for this hero!</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="btn btn-outline-danger" routerLink="/home">Go Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

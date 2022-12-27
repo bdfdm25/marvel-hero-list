@@ -1,10 +1,15 @@
 # MarvelHeroList
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.4.
+This project was developed aiming to show a list of heroes from the [Marvel Heroes API](https://developer.marvel.com/documentation/generalinfo).
+
+## Installing
+
+Access the project root folder and run `npm install` to install all the project dependencies.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve` or `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
